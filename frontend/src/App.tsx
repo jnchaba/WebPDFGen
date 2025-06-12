@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import FileUploader from './components/FileUploader';
 import ProgressBar from './components/ProgressBar';
 import DownloadSection from './components/DownloadSection';
+import ExampleSection from './components/ExampleSection';
 import { ConversionJob, PDFOptions, ProgressUpdate } from './types';
 import { apiService } from './services/api';
 import { wsService } from './services/websocket';
@@ -100,6 +101,42 @@ const App: React.FC = () => {
     }
   };
 
+  const handleExampleSelect = async (filename: string, title: string) => {
+    setError('');
+    setProgressMessage('');
+    
+    try {
+      const exampleData = await apiService.getExample(filename);
+      const response = await apiService.convertContent(
+        exampleData.content,
+        `${title} (Example)`,
+        {} // Default PDF options
+      );
+      
+      const newJob: ConversionJob = {
+        id: response.jobId,
+        filename: response.filename,
+        status: 'pending',
+        progress: 0,
+        createdAt: new Date(),
+      };
+      
+      setCurrentJob(newJob);
+      
+      // Join the job room for WebSocket updates
+      if (isConnected) {
+        wsService.joinJob(response.jobId);
+      } else {
+        // Fallback: poll for updates if WebSocket is not connected
+        pollJobStatus(response.jobId);
+      }
+      
+    } catch (error) {
+      console.error('Example conversion failed:', error);
+      setError(error instanceof Error ? error.message : 'Example conversion failed');
+    }
+  };
+
   const pollJobStatus = async (jobId: string) => {
     const pollInterval = setInterval(async () => {
       try {
@@ -171,6 +208,11 @@ const App: React.FC = () => {
             <FileUploader
               onFileSelect={handleFileSelect}
               isUploading={!!currentJob && currentJob.status !== 'failed'}
+              disabled={!!currentJob && currentJob.status !== 'failed'}
+            />
+
+            <ExampleSection 
+              onExampleSelect={handleExampleSelect}
               disabled={!!currentJob && currentJob.status !== 'failed'}
             />
 

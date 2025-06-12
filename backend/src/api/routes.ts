@@ -202,6 +202,51 @@ export const setupRoutes = (app: Express, io: Server): void => {
     }
   });
 
+  // Define allowed example files
+  const ALLOWED_EXAMPLES = [
+    'simple-document.html',
+    'complex-layout.html',
+    'invoice-template.html'
+  ];
+
+  // Get example file content
+  app.get('/api/example/:filename', async (req: Request, res: Response) => {
+    try {
+      const { filename } = req.params;
+      
+      // Check if filename is in allowed list
+      if (!ALLOWED_EXAMPLES.includes(filename)) {
+        return res.status(404).json({
+          error: 'Example not found',
+          message: 'The requested example file does not exist'
+        });
+      }
+
+      const examplePath = path.join(__dirname, '../../../examples', filename);
+      
+      try {
+        const htmlContent = await fs.readFile(examplePath, 'utf-8');
+        
+        res.json({
+          filename,
+          content: htmlContent
+        });
+      } catch (error) {
+        return res.status(404).json({
+          error: 'Example not found',
+          message: 'The requested example file could not be read'
+        });
+      }
+
+    } catch (error) {
+      console.error('Example fetch error:', error);
+      res.status(500).json({
+        error: 'Failed to fetch example',
+        message: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
   // Delete job and associated files
   app.delete('/api/job/:jobId', async (req: Request, res: Response) => {
     try {

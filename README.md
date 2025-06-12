@@ -93,7 +93,7 @@ This will start both the backend server (port 3001) and frontend development ser
 
 1. **Access the application**
    - Open your browser and navigate to `http://localhost:3000`
-   - The backend API runs on `http://localhost:5000`
+   - The backend API runs on `http://localhost:3001`
 
 2. **Convert HTML to PDF**
    - Drag and drop an HTML file into the upload area, or click to browse

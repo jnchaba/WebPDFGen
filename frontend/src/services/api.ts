@@ -68,6 +68,12 @@ export const apiService = {
   getDownloadUrl: (jobId: string): string => {
     return `${API_BASE_URL}/download/${jobId}`;
   },
+
+  // Get example file content
+  getExample: async (filename: string): Promise<{ filename: string; content: string }> => {
+    const response = await api.get(`/example/${filename}`);
+    return response.data;
+  },
 };
 
 // Add response interceptor for error handling
