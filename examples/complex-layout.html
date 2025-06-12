@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complex Layout Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .card h3 {
+            color: #495057;
+            margin-top: 0;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #1976d2;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .table-container {
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #007bff;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-fill.width-75 {
+            width: 75%;
+        }
+        
+        .progress-fill.width-60 {
+            width: 60%;
+        }
+        
+        .progress-fill.width-90 {
+            width: 90%;
+        }
+        
+        .alert {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            border-left: 4px solid;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .alert-warning {
+            background-color: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+        
+        .alert-info {
+            background-color: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+        
+        .footer {
+            background: #343a40;
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+        }
+        
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Complex Layout Test Document</h1>
+            <p>Testing advanced HTML to PDF conversion with complex layouts</p>
+        </div>
+        
+        <div class="content">
+            <h2>Project Overview</h2>
+            <p>This document demonstrates a complex layout that includes grids, tables, progress bars, and various styled components. It's designed to test the robustness of the HTML to PDF conversion system.</p>
+            
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">128</div>
+                    <div class="stat-label">Files Processed</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">42</div>
+                    <div class="stat-label">Users Active</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">2.3s</div>
+                    <div class="stat-label">Avg. Processing</div>
+                </div>
+            </div>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Feature Analysis</h3>
+                    <p>The system supports various HTML features including CSS grid layouts, flexbox, and modern styling techniques.</p>
+                    <ul>
+                        <li>Responsive grid layouts</li>
+                        <li>Custom CSS styling</li>
+                        <li>Progressive enhancement</li>
+                        <li>Modern typography</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3>Performance Metrics</h3>
+                    <p>Current system performance shows excellent results across all key indicators.</p>
+                    
+                    <div>
+                        <strong>Conversion Speed:</strong>
+                        <div class="progress-bar">
+                            <div class="progress-fill width-90"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <strong>Quality Score:</strong>
+                        <div class="progress-bar">
+                            <div class="progress-fill width-75"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <strong>Reliability:</strong>
+                        <div class="progress-bar">
+                            <div class="progress-fill width-60"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2>System Status Alerts</h2>
+            
+            <div class="alert alert-success">
+                <strong>Success!</strong> All systems are operational and performing within expected parameters.
+            </div>
+            
+            <div class="alert alert-warning">
+                <strong>Warning!</strong> High load detected on server cluster 3. Monitoring closely.
+            </div>
+            
+            <div class="alert alert-info">
+                <strong>Info:</strong> Scheduled maintenance window is planned for next weekend.
+            </div>
+            
+            <h2>Processing Queue</h2>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Job ID</th>
+                            <th>Filename</th>
+                            <th>Status</th>
+                            <th>Progress</th>
+                            <th>Started</th>
+                            <th>Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>JOB-001</td>
+                            <td>annual-report.html</td>
+                            <td>Completed</td>
+                            <td>100%</td>
+                            <td>14:30:22</td>
+                            <td>2.1s</td>
+                        </tr>
+                        <tr>
+                            <td>JOB-002</td>
+                            <td>product-catalog.html</td>
+                            <td>Processing</td>
+                            <td>75%</td>
+                            <td>14:31:45</td>
+                            <td>1.8s</td>
+                        </tr>
+                        <tr>
+                            <td>JOB-003</td>
+                            <td>user-manual.html</td>
+                            <td>Queued</td>
+                            <td>0%</td>
+                            <td>14:32:10</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>JOB-004</td>
+                            <td>marketing-brief.html</td>
+                            <td>Failed</td>
+                            <td>25%</td>
+                            <td>14:29:15</td>
+                            <td>0.5s</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h2>Configuration Example</h2>
+            
+            <div class="code-block">
+{
+  "pdfOptions": {
+    "format": "A4",
+    "orientation": "portrait",
+    "margin": {
+      "top": "2cm",
+      "right": "2cm",
+      "bottom": "2cm",
+      "left": "2cm"
+    },
+    "printBackground": true,
+    "displayHeaderFooter": false
+  }
+}
+            </div>
+            
+            <h2>Conclusion</h2>
+            <p>This complex layout document tests various advanced features of the HTML to PDF conversion system including:</p>
+            <ul>
+                <li>CSS Grid and Flexbox layouts</li>
+                <li>Complex table structures</li>
+                <li>Progress bars and visual indicators</li>
+                <li>Alert boxes and status messages</li>
+                <li>Code blocks and preformatted text</li>
+                <li>Gradient backgrounds and modern styling</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>HTML to PDF Converter Test Document • Generated with advanced styling</p>
+        </div>
+    </div>
+</body>
+</html>

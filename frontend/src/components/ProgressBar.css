@@ -1,0 +1,196 @@
+.progress-container {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.progress-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.status-icon {
+  font-size: 18px;
+}
+
+.filename {
+  font-weight: 500;
+  color: #333;
+  font-size: 16px;
+}
+
+.status-text {
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.progress-percentage {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  min-width: 50px;
+  text-align: right;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 8px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.progress-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.progress-message {
+  color: #666;
+  font-size: 14px;
+  font-style: italic;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  border-left: 3px solid #007bff;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 14px;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  background-color: #f8d7da;
+  border-radius: 4px;
+  border-left: 3px solid #dc3545;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.error-icon {
+  font-size: 16px;
+}
+
+.job-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #e9ecef;
+}
+
+.job-id,
+.job-time {
+  color: #6c757d;
+  font-size: 12px;
+}
+
+.job-id {
+  font-family: monospace;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .progress-container {
+    padding: 15px;
+    margin: 15px 0;
+  }
+
+  .progress-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .progress-info {
+    width: 100%;
+  }
+
+  .progress-percentage {
+    align-self: flex-end;
+  }
+
+  .filename {
+    font-size: 14px;
+  }
+
+  .job-details {
+    gap: 6px;
+  }
+}
+
+/* Animation for processing state */
+.progress-container:has(.status-text[style*="007bff"]) .progress-bar-fill {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-container:has(.status-text[style*="007bff"]) .progress-bar-fill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: loading-wave 1.5s infinite;
+}
+
+@keyframes loading-wave {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}

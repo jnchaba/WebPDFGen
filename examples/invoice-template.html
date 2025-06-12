@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice #INV-2024-001</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background: white;
+        }
+        
+        .invoice-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 0;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        
+        .invoice-number {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            text-align: right;
+        }
+        
+        .invoice-number h2 {
+            margin: 0;
+            font-size: 1.5em;
+            opacity: 0.9;
+        }
+        
+        .invoice-number p {
+            margin: 5px 0 0 0;
+            opacity: 0.8;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .billing-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 30px 0;
+        }
+        
+        .bill-to, .bill-from {
+            padding: 20px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        
+        .bill-to h3, .bill-from h3 {
+            margin: 0 0 15px 0;
+            color: #495057;
+            font-size: 1.2em;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 8px;
+        }
+        
+        .company-info {
+            line-height: 1.6;
+        }
+        
+        .invoice-details {
+            margin: 30px 0;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+        
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .detail-item {
+            text-align: center;
+        }
+        
+        .detail-label {
+            font-weight: bold;
+            color: #666;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .detail-value {
+            font-size: 1.2em;
+            color: #333;
+            margin-top: 5px;
+        }
+        
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .items-table th {
+            background: #495057;
+            color: white;
+            padding: 15px 10px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .items-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .items-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .items-table tr:hover {
+            background: #e9ecef;
+        }
+        
+        .text-right {
+            text-align: right;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .totals-section {
+            margin: 30px 0;
+            float: right;
+            width: 300px;
+        }
+        
+        .totals-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .totals-table td {
+            padding: 8px 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .totals-table .total-label {
+            font-weight: 600;
+            text-align: right;
+            background: #f8f9fa;
+        }
+        
+        .totals-table .total-amount {
+            text-align: right;
+            width: 120px;
+        }
+        
+        .grand-total {
+            background: #495057 !important;
+            color: white !important;
+            font-weight: bold !important;
+            font-size: 1.1em !important;
+        }
+        
+        .payment-terms {
+            clear: both;
+            margin: 40px 0 20px 0;
+            padding: 20px;
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+        }
+        
+        .payment-terms h3 {
+            margin: 0 0 10px 0;
+            color: #856404;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding: 20px;
+            background: #343a40;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+        }
+        
+        .footer p {
+            margin: 5px 0;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+            }
+            
+            .invoice-container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="header">
+            <h1>INVOICE</h1>
+            <div class="invoice-number">
+                <h2>INV-2024-001</h2>
+                <p>Issue Date: March 15, 2024</p>
+                <p>Due Date: April 14, 2024</p>
+                <span class="status-badge status-pending">Pending</span>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="billing-info">
+                <div class="bill-from">
+                    <h3>Bill From:</h3>
+                    <div class="company-info">
+                        <strong>TechSolutions Inc.</strong><br>
+                        123 Innovation Drive<br>
+                        San Francisco, CA 94107<br>
+                        United States<br><br>
+                        <strong>Phone:</strong> +1 (555) 123-4567<br>
+                        <strong>Email:</strong> billing@techsolutions.com<br>
+                        <strong>Tax ID:</strong> 123-45-6789
+                    </div>
+                </div>
+                
+                <div class="bill-to">
+                    <h3>Bill To:</h3>
+                    <div class="company-info">
+                        <strong>Acme Corporation</strong><br>
+                        456 Business Plaza<br>
+                        New York, NY 10001<br>
+                        United States<br><br>
+                        <strong>Contact:</strong> John Smith<br>
+                        <strong>Phone:</strong> +1 (555) 987-6543<br>
+                        <strong>Email:</strong> john.smith@acme.com
+                    </div>
+                </div>
+            </div>
+            
+            <div class="invoice-details">
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <div class="detail-label">Payment Terms</div>
+                        <div class="detail-value">Net 30</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Project</div>
+                        <div class="detail-value">Web Development</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Purchase Order</div>
+                        <div class="detail-value">PO-2024-0089</div>
+                    </div>
+                </div>
+            </div>
+            
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th style="width: 50%;">Description</th>
+                        <th class="text-center" style="width: 10%;">Qty</th>
+                        <th class="text-right" style="width: 15%;">Rate</th>
+                        <th class="text-right" style="width: 15%;">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>Frontend Development</strong><br>
+                            <small>React.js application development with modern UI/UX design patterns, responsive layout implementation, and cross-browser compatibility.</small>
+                        </td>
+                        <td class="text-center">40 hrs</td>
+                        <td class="text-right">$125.00</td>
+                        <td class="text-right">$5,000.00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Backend API Development</strong><br>
+                            <small>RESTful API design and implementation using Node.js and Express, including database integration and authentication systems.</small>
+                        </td>
+                        <td class="text-center">32 hrs</td>
+                        <td class="text-right">$135.00</td>
+                        <td class="text-right">$4,320.00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Database Design & Setup</strong><br>
+                            <small>PostgreSQL database architecture, schema design, optimization, and deployment configuration.</small>
+                        </td>
+                        <td class="text-center">16 hrs</td>
+                        <td class="text-right">$115.00</td>
+                        <td class="text-right">$1,840.00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Testing & Quality Assurance</strong><br>
+                            <small>Unit testing, integration testing, and end-to-end testing implementation with Jest and Cypress.</small>
+                        </td>
+                        <td class="text-center">24 hrs</td>
+                        <td class="text-right">$100.00</td>
+                        <td class="text-right">$2,400.00</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Deployment & DevOps</strong><br>
+                            <small>AWS infrastructure setup, CI/CD pipeline configuration, monitoring, and documentation.</small>
+                        </td>
+                        <td class="text-center">12 hrs</td>
+                        <td class="text-right">$145.00</td>
+                        <td class="text-right">$1,740.00</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="clearfix">
+                <div class="totals-section">
+                    <table class="totals-table">
+                        <tr>
+                            <td class="total-label">Subtotal:</td>
+                            <td class="total-amount">$15,300.00</td>
+                        </tr>
+                        <tr>
+                            <td class="total-label">Discount (5%):</td>
+                            <td class="total-amount">-$765.00</td>
+                        </tr>
+                        <tr>
+                            <td class="total-label">Tax (8.25%):</td>
+                            <td class="total-amount">$1,199.14</td>
+                        </tr>
+                        <tr>
+                            <td class="total-label grand-total">Total:</td>
+                            <td class="total-amount grand-total">$15,734.14</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="payment-terms">
+                <h3>Payment Information</h3>
+                <p><strong>Payment Method:</strong> Bank transfer or check</p>
+                <p><strong>Bank Details:</strong> First National Bank, Account #123-456-789, Routing #987654321</p>
+                <p><strong>Terms:</strong> Payment is due within 30 days of invoice date. Late payments may incur a 1.5% monthly service charge.</p>
+            </div>
+            
+            <div class="footer">
+                <p><strong>Thank you for your business!</strong></p>
+                <p>If you have any questions about this invoice, please contact us at billing@techsolutions.com</p>
+                <p>TechSolutions Inc. • 123 Innovation Drive • San Francisco, CA 94107</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
