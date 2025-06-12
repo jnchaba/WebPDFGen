@@ -11,6 +11,8 @@ A full-stack TypeScript application that converts HTML files to PDF with real-ti
 - 🔒 **Secure**: File validation and error handling
 - 🚀 **Fast Processing**: Puppeteer-based PDF generation
 - 📊 **Modern UI**: Clean, professional interface with visual feedback
+- 👁️ **HTML Preview**: View example HTML files with Font Awesome icons
+- 🎯 **Example Templates**: Pre-built HTML templates for testing and reference
 
 ## Architecture
 
@@ -26,6 +28,8 @@ A full-stack TypeScript application that converts HTML files to PDF with real-ti
 - **Drag-and-drop** file upload component
 - **Real-time progress** tracking via WebSocket
 - **PDF preview** and download functionality
+- **HTML preview modal** with raw code display
+- **Font Awesome icons** for enhanced UI
 - **Responsive design** with modern CSS
 
 ## Project Structure
@@ -49,16 +53,28 @@ WebPDFGen/
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── FileUploader.tsx  # Drag-and-drop upload component
-│   │   │   ├── ProgressBar.tsx   # Real-time progress display
-│   │   │   └── DownloadSection.tsx # PDF download and preview
+│   │   │   ├── FileUploader.tsx     # Drag-and-drop upload component
+│   │   │   ├── ProgressBar.tsx      # Real-time progress display
+│   │   │   ├── DownloadSection.tsx  # PDF download and preview
+│   │   │   ├── ExampleSection.tsx   # HTML example templates with preview
+│   │   │   ├── HtmlModal.tsx        # Modal for HTML code preview
+│   │   │   ├── FileUploader.css     # FileUploader styles
+│   │   │   ├── ProgressBar.css      # ProgressBar styles
+│   │   │   ├── DownloadSection.css  # DownloadSection styles
+│   │   │   ├── ExampleSection.css   # ExampleSection styles
+│   │   │   └── HtmlModal.css        # HtmlModal styles
 │   │   ├── services/
-│   │   │   ├── api.ts            # API client for backend communication
-│   │   │   └── websocket.ts      # WebSocket client service
+│   │   │   ├── api.ts               # API client for backend communication
+│   │   │   └── websocket.ts         # WebSocket client service
 │   │   ├── types/
-│   │   │   └── index.ts          # Frontend TypeScript types
-│   │   ├── App.tsx               # Main React application
-│   │   └── App.css               # Application styles
+│   │   │   └── index.ts             # Frontend TypeScript types
+│   │   ├── App.tsx                  # Main React application
+│   │   ├── App.css                  # Application styles
+│   │   ├── index.tsx                # React entry point
+│   │   └── index.css                # Global styles
+│   ├── public/
+│   │   ├── index.html               # HTML template
+│   │   └── favicon.ico              # Application favicon
 │   ├── package.json
 │   └── tsconfig.json
 ├── examples/                     # Sample HTML files for testing
@@ -103,7 +119,8 @@ This will start both the backend server (port 3001) and frontend development ser
    - Download or preview the generated PDF when complete
 
 3. **Test with examples**
-   - Use the sample HTML files in the `examples/` directory
+   - Use the sample HTML files in the `examples/` directory via the "Try Our Examples" section
+   - Click the eye icon (👁️) next to any example to preview the raw HTML code
    - Try `simple-document.html` for basic conversion testing
    - Use `complex-layout.html` to test advanced CSS features
    - Test `invoice-template.html` for professional document formatting
@@ -119,9 +136,13 @@ This will start both the backend server (port 3001) and frontend development ser
 - `GET /api/jobs` - Get all jobs
 - `DELETE /api/job/:jobId` - Delete job and associated files
 
-### File Download
-- `GET /api/download/:jobId` - Download generated PDF
+### File Download & Preview
+- `GET /api/download/:jobId` - Download generated PDF (attachment)
+- `GET /api/download/:jobId?preview=true` - Preview PDF inline in browser
 - `GET /outputs/:filename` - Direct file access
+
+### Examples
+- `GET /api/example/:filename` - Get example HTML file content (for preview)
 
 ### System
 - `GET /health` - Health check endpoint
@@ -215,8 +236,11 @@ npm run clean
 - Drag-and-drop file upload
 - Visual progress indicators
 - Error handling with user-friendly messages
-- PDF preview in new tab
+- PDF preview in new tab (inline viewing)
 - Direct download functionality
+- HTML code preview in modal dialogs
+- Example templates with preview functionality
+- Font Awesome icons for enhanced visual appeal
 - Responsive design for all devices
 
 ## Browser Support
@@ -241,6 +265,7 @@ npm run clean
 - `typescript` - Type safety
 - `socket.io-client` - WebSocket client
 - `axios` - HTTP client
+- `@fontawesome/fontawesome-free` - Icon library for UI enhancement
 
 ## License
 

@@ -55,6 +55,13 @@
   margin: 0 0 4px 0;
 }
 
+.example-header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
 .example-filename {
   font-size: 0.85rem;
   color: #666;
@@ -62,6 +69,38 @@
   background: #f8f9fa;
   padding: 2px 6px;
   border-radius: 4px;
+  flex: 1;
+}
+
+.preview-button {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 28px;
+}
+
+.preview-button:hover:not(:disabled) {
+  background: #218838;
+  transform: scale(1.05);
+}
+
+.preview-button:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.preview-button i {
+  font-size: 0.85rem;
 }
 
 .example-description {

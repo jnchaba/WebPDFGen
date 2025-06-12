@@ -31,7 +31,7 @@ const DownloadSection: React.FC<DownloadSectionProps> = ({ job, onReset }) => {
   };
 
   const handlePreview = () => {
-    const url = apiService.getDownloadUrl(job.id);
+    const url = apiService.getPreviewUrl(job.id);
     window.open(url, '_blank');
   };
 

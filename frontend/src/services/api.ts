@@ -69,6 +69,11 @@ export const apiService = {
     return `${API_BASE_URL}/download/${jobId}`;
   },
 
+  // Get preview URL
+  getPreviewUrl: (jobId: string): string => {
+    return `${API_BASE_URL}/download/${jobId}?preview=true`;
+  },
+
   // Get example file content
   getExample: async (filename: string): Promise<{ filename: string; content: string }> => {
     const response = await api.get(`/example/${filename}`);

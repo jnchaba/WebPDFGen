@@ -104,6 +104,7 @@ export const setupRoutes = (app: Express, io: Server): void => {
   app.get('/api/download/:jobId', async (req: Request, res: Response) => {
     try {
       const { jobId } = req.params;
+      const { preview } = req.query;
       const job = jobManager.getJob(jobId);
 
       if (!job) {
@@ -131,9 +132,15 @@ export const setupRoutes = (app: Express, io: Server): void => {
         });
       }
 
-      // Set headers for file download
+      // Set headers for file
       res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader('Content-Disposition', `attachment; filename="${job.outputPath}"`);
+      
+      // Set Content-Disposition based on whether it's a preview or download
+      if (preview === 'true') {
+        res.setHeader('Content-Disposition', `inline; filename="${job.outputPath}"`);
+      } else {
+        res.setHeader('Content-Disposition', `attachment; filename="${job.outputPath}"`);
+      }
       
       // Send file
       res.sendFile(filePath);
